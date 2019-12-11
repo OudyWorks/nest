@@ -1,0 +1,10 @@
+{
+    "extends": "@nestjs/schematics",
+    "schematics": {
+      "entity": {
+        "description": "Add a TypeOrm entity to your project",
+        "factory": "./entity/entity.factory#main",
+        "schema": "./entity/schema.json"
+      }
+    }
+}

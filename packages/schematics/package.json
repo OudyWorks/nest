@@ -1,0 +1,36 @@
+{
+  "name": "@oudy/nest-schematics",
+  "version": "1.0.0",
+  "description": "",
+  "schematics": "./src/collection.json",
+  "scripts": {
+    "prebuild": "rm -f node_modules/@nestjs/schematics/utils/module.finder.ts && npm run copy:schemas",
+    "build": "tsc -p tsconfig.json",
+    "build:dev": "tsc -p tsconfig.json -w",
+    "format": "prettier --write \"src/**/*.ts\" \"!src/**/files/**/*\" \"test/**/*.ts\"",
+    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "test": "npm run build && jasmine src/**/*_spec.js",
+    "rm": "rm -r src/**/*.js && rm -r src/**/*.d.ts && rm -r src/**/*.js.map",
+    "copy:schemas": "echo 'Hi'",
+    "prepublish:npm": "npm run build",
+    "publish:npm": "npm publish --access public",
+    "prepublish:next": "npm run build",
+    "publish:next": "npm publish --access public --tag next"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@nestjs/schematics": "^6.7.6",
+    "js-yaml": "^3.13.1",
+    "lodash": "^4.17.15",
+    "prettier": "^1.19.1"
+  },
+  "devDependencies": {
+    "@types/jasmine": "^3.5.0",
+    "@types/js-yaml": "^3.12.1",
+    "@types/lodash": "^4.14.149",
+    "@types/node": "^12.12.17",
+    "@types/prettier": "^1.19.0",
+    "tslint": "^5.20.1"
+  }
+}
