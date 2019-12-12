@@ -7,34 +7,34 @@ import { <%= classify(name) %>MutateOneArgs } from './<%= name %>.mutateOne.args
 
 @Resolver(of => <%= classify(name) %>)
 export class <%= classify(name) %>Resolver {
-  constructor(private readonly <%= name %>Service: <%= classify(name) %>Service) {}
+  constructor(private readonly <%= camelize(name) %>Service: <%= classify(name) %>Service) {}
 
   @Query(type => <%= classify(name) %>, {
-    name: '<%= name %>',
+    name: '<%= camelize(name) %>',
   })
-  async _<%= name %>(@Args() { id, key }: GetOneArgs): Promise<<%= classify(name) %>> {
-    const <%= name %> = await this.<%= name %>Service.load(id, key);
-    if (!<%= name %>) {
+  async _<%= camelize(name) %>(@Args() { id, key }: GetOneArgs): Promise<<%= classify(name) %>> {
+    const <%= camelize(name) %> = await this.<%= camelize(name) %>Service.load(id, key);
+    if (!<%= camelize(name) %>) {
       throw new NotFoundException(id);
     }
-    return <%= name %>;
+    return <%= camelize(name) %>;
   }
 
   @Query(type => [<%= classify(name) %>], {
-    name: '<%= name %>s',
+    name: '<%= camelize(name) %>s',
   })
-  async _<%= name %>s(): Promise<<%= classify(name) %>[]> {
-    return this.<%= name %>Service.loadAll();
+  async _<%= camelize(name) %>s(): Promise<<%= classify(name) %>[]> {
+    return this.<%= camelize(name) %>Service.loadAll();
   }
 
   @Mutation(returns => <%= classify(name) %>, {
-    name: '<%= name %>',
+    name: '<%= camelize(name) %>',
   })
-  async __<%= name %>(@Args() { <%= name %>, id }: <%= classify(name) %>MutateOneArgs) {
-    const $<%= name %> = await this.<%= name %>Service.save(<%= name %>, id);
-    if (!$<%= name %>) {
+  async __<%= camelize(name) %>(@Args() { <%= camelize(name) %>, id }: <%= classify(name) %>MutateOneArgs) {
+    const $<%= camelize(name) %> = await this.<%= camelize(name) %>Service.save(<%= camelize(name) %>, id);
+    if (!$<%= camelize(name) %>) {
       throw new NotFoundException(id);
     }
-    return $<%= name %>;
+    return $<%= camelize(name) %>;
   }
 }

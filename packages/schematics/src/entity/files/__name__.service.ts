@@ -30,29 +30,29 @@ export class <%= classify(name) %>Service {
     }
   }
 
-  async save(<%= name %>: <%= classify(name) %>Input, id?: string): Promise<<%= classify(name) %> | void> {
-    const $<%= name %> = await this.load(id).then(instance => {
+  async save(<%= camelize(name) %>: <%= classify(name) %>Input, id?: string): Promise<<%= classify(name) %> | void> {
+    const $<%= camelize(name) %> = await this.load(id).then(instance => {
       if (id && !instance) {
         throw new NotFoundException(id);
       } else {
         return instance || new <%= classify(name) %>();
       }
     });
-    const state = plainToClass(<%= classify(name) %>Input, <%= name %>);
+    const state = plainToClass(<%= classify(name) %>Input, <%= camelize(name) %>);
     await validateOrReject(state, {
-      skipUndefinedProperties: !!$<%= name %>.id,
-      skipMissingProperties: !!$<%= name %>.id,
+      skipUndefinedProperties: !!$<%= camelize(name) %>.id,
+      skipMissingProperties: !!$<%= camelize(name) %>.id,
     })
       .then(() => {
-        Object.assign($<%= name %>, state);
+        Object.assign($<%= camelize(name) %>, state);
       })
       .catch(errors => {
         throw new UnprocessableEntityException(errors);
       });
-    await this.repository.save($<%= name %>).catch(error => {
+    await this.repository.save($<%= camelize(name) %>).catch(error => {
       throw new InternalServerErrorException(error);
     });
-    return $<%= name %>;
+    return $<%= camelize(name) %>;
   }
 
   loadAll() {
